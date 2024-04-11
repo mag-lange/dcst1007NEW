@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code from the lecture</title>
+</head>
+<body>
+
+    <script>class MyDate extends Date {
+        constructor() {
+            super();
+        }
+        visDato() {
+            let mnd = ['januar', 'februar', 'mars','april','mai','juni','juli','august','september','oktober','november','desember'];
+            return this.getDate() + '. ' + mnd[this.getMonth()] + ' ' + this.getFullYear();
+        }
+    }
+
+    let date = new MyDate()
+    console.log(date.visDato())
+
+    </script>
+</body>
+</html>

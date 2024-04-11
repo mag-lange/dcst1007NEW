@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="OOP5.css"> <!--General styling-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/> <!--Map-styling (managed externally)-->
+    <title>Big Mountains in Norway:)</title>
+</head>
+<body>
+    <h1> OOP5 - Mountains with JSON and leafletjs </h1>
+    <div id="map"></div>
+    <table id="mountainsTable">
+        <thead>
+          <tr>
+            <th>County</th>
+            <th>Name</th>
+            <th>Elevation</th>
+          </tr>
+        </thead>
+        <tbody>
+        <!-- This is empty right now, but fills up through js:)-->
+        </tbody>
+      </table>
+    <script src="mountains.json"></script> <!--All this data was hardcoded by me (painful), not sure how automize this-->
+    <script src="OOP5.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script> <!--The script for the plugin (the map)-->
+</body>
+</html>

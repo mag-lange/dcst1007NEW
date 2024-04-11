@@ -1,0 +1,21 @@
+table {
+    width: 70%; /* 70% to ensure that I have space for the map as well*/
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 5px;
+    text-align: left;
+    border-bottom: 7px solid #ddd;
+  }
+  th {
+    background-color: #f2f2f2; /*subtle*/
+  }
+  #map {
+    position: absolute;
+    left: 650px;
+    top: 80px;
+    height: 250px;
+    width: 250px;
+    /*This is optimized so I can see everything on my screen without needing to scroll
+    but it is static, so I don't think mobile users would have the best experience*/
+  }

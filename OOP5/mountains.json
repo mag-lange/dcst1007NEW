@@ -1,0 +1,17 @@
+{
+  
+  "fjelltopper":[
+    {"fylke":"Viken", "name":"Folarskardnuten", "elevation":"1933", "x":"60.6074257", "y": "7.7824365"},
+    {"fylke":"Innlandet", "name":"Galdhopiggen", "elevation":"2469", "x":"61.6364962", "y": "8.3124178" },
+    {"fylke":"Vestfold og Telemark", "name":"Gaustatoppen", "elevation":"1883", "x":"59.8542133", "y": "8.6491710"},
+    {"fylke":"Troms og Finnmark", "name":"Jiehkkevarri", "elevation":"1834", "x":"69.4692504", "y": "19.8776297"},
+    {"fylke":"Oslo", "name":"Kjerkeberget", "elevation":"630", "x":"60.1358030", "y": "10.6174720"},
+    {"fylke":"Nordland", "name":"Oksskolten", "elevation":"1915", "x":"66.0166667", "y": "14.3333333"},
+    {"fylke":"More og Romsdal", "name":"Pyttegga", "elevation":"1999", "x":"62.2166667", "y": "7.7000001"},
+    {"fylke":"Vestland", "name":"Store Skagastolstiden", "elevation":"2405", "x":"61.4613890", "y": "7.8713890"},
+    {"fylke":"Tronderlag", "name":"Storskrymten", "elevation":"1985", "x":"62.3725254", "y": "9.0617728"},
+    {"fylke":"Agder", "name":"Saebyggjenuten", "elevation":"1507", "x":"59.4615522", "y": "7.6239590"},
+    {"fylke":"Rogaland", "name":"Vassdalseggi", "elevation":"1658", "x":"59.7666667", "y": "7.1166667"}
+  ]
+}
+  

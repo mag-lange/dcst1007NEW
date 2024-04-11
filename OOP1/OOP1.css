@@ -1,0 +1,37 @@
+
+    #volvo_car {
+        top: 150px; /* These are used so that I can manipulate the positions and using position: absolute*/
+    }
+    #bmw_car {
+        top: 200px;
+    }
+    #toyota_car {
+        top: 260px;
+    }
+    #ferrari_car {
+        top: 300px;
+    }
+
+
+    #speed_cars {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    #speed_cars li {
+        display: inline-block;
+        margin-right: 20px; 
+    }
+    
+    .speed_value {
+        display: inline-block;
+        margin-left: 5px; 
+    }
+    
+    img {
+        position: absolute;
+        width: 50px; 
+        height: auto; 
+        display: block;
+        margin: 10px 0; 
+    }

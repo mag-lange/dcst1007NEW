@@ -1,0 +1,93 @@
+.menu {
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.menu a {
+  color: #333;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.menu a:hover {
+  color: green;
+}
+
+/* Home Styles */
+.home {
+  padding: 20px;
+}
+
+.home img {
+  max-width: 100%;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+.menu-container {
+  width: 217px;
+}
+
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #ccc;
+}
+
+.menu-table th {
+  background-color: #f2f2f2;
+  border-bottom: 2px solid #ccc;
+  padding: 10px;
+}
+
+.menu-table td {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+.menu-table a:hover {
+  color: green;
+}
+
+.image-container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(200px, 1fr)
+  ); /* I got this function from Chat-GPT*/
+  grid-gap: 10px;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+}
