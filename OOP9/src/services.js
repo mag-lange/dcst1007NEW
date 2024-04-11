@@ -1,5 +1,5 @@
 import { pool } from './mysql-pool';
-
+//---------------Imported from my services.js file from OOP8--------------//
 class StudentService {
   getStudents(success) {
     pool.query('SELECT * FROM Students', (error, results) => {
@@ -12,102 +12,76 @@ class StudentService {
   getStudent(id, success) {
     pool.query('SELECT * FROM Students WHERE id=?', [id], (error, results) => {
       if (error) return console.error(error);
+      console.log(results);
 
       success(results[0]);
+    });
+  }
+
+  deleteStudent(id, success) {
+    pool.query('DELETE FROM Students WHERE id=?', [id], (error) => {
+      if (error) return console.error(error);
+      console.log('Student deleted');
+      success();
     });
   }
 
   updateStudent(student, success) {
     pool.query(
-      'UPDATE Students SET name=?, email=?, course_id=? WHERE id=?',
-      [student.name, student.email, student.courseId, student.id],
+      'UPDATE Students SET name=?, email=? WHERE id=?',
+      [student.name, student.email, student.id],
       (error, results) => {
         if (error) return console.error(error);
-
         success();
       },
     );
   }
 
-  addStudent(student, success) {
+  getEnrolledProgram(id, success) {
+    //I know this is supposed to be a many-to-many relation, meaning that I should make an extra table to map
+    console.log('getting name of course_programs');
     pool.query(
-      'INSERT INTO Students (name, email, course_id) VALUES (?, ?, ?)',
-      [student.name, student.email],
+      'SELECT c.course_name, c.course_code, c.course_id FROM study_program c JOIN Students s ON c.course_id = s.course_id WHERE s.id = ?',
+      [id],
       (error, results) => {
         if (error) return console.error(error);
-
-        success(results.insertId);
+        console.log(results);
+        success(results[0]);
       },
     );
   }
-
-  deleteStudent(id, success) {
-    pool.query('DELETE FROM Students WHERE id=?', [id], (error, results) => {
-      if (error) return console.error(error);
-
-      success();
-    });
-  }
 }
+export let studentService = new StudentService();
 
-class CourseService {
-  getcourses(success) {
-    console.log("GetCourses Method was called, attempting to get courses")
+class StudyProgramService {
+  getStudyPrograms(success) {
     pool.query('SELECT * FROM study_program', (error, results) => {
       if (error) return console.error(error);
-
       success(results);
     });
-}
-
-  getcourse(id, success) {
-    pool.query('SELECT * FROM study_program WHERE id=?', [id], (error, results) => {
+  }
+  getOneProgram(course_id, success) {
+    pool.query('SELECT * FROM study_program WHERE course_id=?', [course_id], (error, results) => {
       if (error) return console.error(error);
-
       success(results[0]);
     });
   }
-
-  getStudents(courseId, success) {
-    pool.query('SELECT * FROM Students WHERE course_id = ?', [courseId], (error, results) => {
-      if (error) return console.error(error); // If error, show error in console (in red text) and return
-
-      success(results);
-    });
-  }
-
-  updatecourse(course, success) {
+  updateCourse(course, success) {
     pool.query(
-      'UPDATE study_program SET course_id=?, course_code=?, course_name=?, student_leader_id=? WHERE course_id=?',
-      [course.name, course.description, course.image, course.leader, course.id],
+      'UPDATE study_program SET course_name=?, course_code=? WHERE course_id=?',
+      [course.course_name, course.course_code, course.course_id],
       (error, results) => {
         if (error) return console.error(error);
-
         success();
       },
     );
   }
-
-  addcourse(course, success) {
-    pool.query(
-      'INSERT INTO study_program (name, description, image, leader) VALUES (?, ?, ?, 0)',
-      [course.name, course.description, course.image],
-      (error, results) => {
-        if (error) return console.error(error);
-
-        success(results.insertId);
-      },
-    );
-  }
-
-  deletecourse(id, success) {
-    pool.query('DELETE FROM study_program WHERE id=?', [id], (error, results) => {
+  deleteCourse(course_id, success) {
+    pool.query('DELETE FROM study_program WHERE course_id=?', [course_id], (error) => {
       if (error) return console.error(error);
-
+      console.log('Program deleted');
       success();
     });
   }
 }
-
-export let studentService = new StudentService();
-export let courseService = new CourseService();
+export let studyprogramservice = new StudyProgramService();
