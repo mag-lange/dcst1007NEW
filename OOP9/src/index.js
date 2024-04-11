@@ -207,8 +207,14 @@ class CourseDetails extends Component {
             <Column>{this.leader.name} </Column>
           </Row>
           <Row>
-          <Column width={2}>Students:</Column>
-          <Column width={2}>{this.list_names.name}</Column>
+          <Column width={2}>Students :</Column>
+          {this.list_names.map((list_name) => (
+            <li key={list_name.name}>
+            {list_name.name}
+            </li>
+          ))}
+          
+          
           </Row>
         </Card>
       </div>
