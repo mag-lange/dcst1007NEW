@@ -17,6 +17,13 @@ class StudentService {
       success(results[0]);
     });
   }
+  getStudentsEnrolled(course_id, success) {
+    pool.query('SELECT name FROM Students WHERE course_id = ?;', [course_id], (error, results) => {
+      if (error) return console.error(error);
+      console.log(results)
+      success(results[0]) //!
+    })
+  }
 
   deleteStudent(id, success) {
     pool.query('DELETE FROM Students WHERE id=?', [id], (error) => {
@@ -56,15 +63,27 @@ export let studentService = new StudentService();
 class StudyProgramService {
   getStudyPrograms(success) {
     pool.query('SELECT * FROM study_program', (error, results) => {
+      console.log("Getting all study programs")
       if (error) return console.error(error);
       success(results);
     });
   }
   getOneProgram(course_id, success) {
     pool.query('SELECT * FROM study_program WHERE course_id=?', [course_id], (error, results) => {
+      console.log("Getting one program")
+      console.log(results)
       if (error) return console.error(error);
       success(results[0]);
     });
+  }
+  getLeader(course_id, success) {
+    pool.query('SELECT s.name FROM Students s JOIN study_program c ON s.id = c.student_leader_id WHERE c.student_leader_id = (SELECT student_leader_id FROM study_program WHERE course_id = ?); ',
+  [course_id], (error, results) => {
+    if (error) return console.error(error);
+    console.log("getting leader")
+    console.log(results)
+    success(results[0])
+  })
   }
   updateCourse(course, success) {
     pool.query(

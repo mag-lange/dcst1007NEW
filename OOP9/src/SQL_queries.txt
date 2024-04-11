@@ -1,0 +1,72 @@
+A list of SQL queries (beyond what I have done in previous tasks)
+(All values are added through GPT)
+Instead of groups I have chosen subjects in this task
+
+Adding a description to each Course (from ChatGPT)
+--------------------------------------------------------------------------------------------
+UPDATE study_program
+SET course_details = 
+    CASE id
+        WHEN 1 THEN 'Software Engineering focuses on the principles and practices of developing high-quality software systems.'
+        WHEN 2 THEN 'Advanced Software Engineering covers advanced topics in software development, such as design patterns and software architecture.'
+        WHEN 3 THEN 'Database Systems covers the theory and implementation of database management systems.'
+        WHEN 4 THEN 'Artificial Intelligence explores techniques for creating intelligent systems that can perceive, reason, and act.'
+        WHEN 5 THEN 'Web Development teaches the skills necessary to create dynamic and interactive websites and web applications.'
+        WHEN 6 THEN 'Mobile Application Development focuses on creating software applications for mobile devices such as smartphones and tablets.'
+        WHEN 7 THEN 'Network Security covers the principles and techniques for securing computer networks and systems.'
+        WHEN 8 THEN 'Cloud Computing explores the use of remote servers hosted on the internet to store, manage, and process data.'
+        WHEN 9 THEN 'Software Testing teaches the methods and techniques for ensuring the quality and reliability of software systems.'
+        WHEN 10 THEN 'Data Mining explores techniques for discovering patterns and trends in large datasets.'
+        WHEN 11 THEN 'Human-Computer Interaction focuses on the design and evaluation of user interfaces for software systems.'
+        WHEN 12 THEN 'Computer Graphics covers the theory and techniques for creating and manipulating images and animations.'
+        WHEN 13 THEN 'Embedded Systems teaches the design and programming of computer systems that are embedded in other devices.'
+        WHEN 14 THEN 'Machine Learning explores algorithms and techniques for creating systems that can learn from data.'
+        WHEN 15 THEN 'Cybersecurity covers the protection of computer systems and networks from cyber threats.'
+        WHEN 16 THEN 'Big Data Analytics focuses on extracting insights from large and complex datasets using statistical and computational methods.'
+        WHEN 17 THEN 'Software Architecture covers the principles and practices for designing and implementing software systems.'
+        WHEN 18 THEN 'Information Retrieval explores techniques for finding relevant information from large collections of data.'
+        WHEN 19 THEN 'Parallel Computing covers the theory and techniques for executing multiple computational tasks simultaneously.'
+        WHEN 20 THEN 'Natural Language Processing focuses on enabling computers to understand and process human language.'
+        WHEN 21 THEN 'Game Development teaches the design and implementation of video games and interactive entertainment software.'
+        WHEN 22 THEN 'Blockchain Technology explores the principles and applications of blockchain-based systems.'
+        WHEN 23 THEN 'Cyber-Physical Systems covers the integration of computational algorithms and physical processes.'
+        WHEN 24 THEN 'Distributed Systems teaches the design and implementation of systems that consist of multiple interconnected computers.'
+        WHEN 25 THEN 'Virtual Reality explores the creation of immersive simulated environments using computer technology.'
+    END;
+-----------------------------------------------------------------------------------
+Adding an image link (I will have to add them by hand later)
+------------------------------------------------------------------------------------
+ALTER TABLE study_program ADD image_link VARCHAR(255); 
+UPDATE study_program
+SET image_link = 
+    CASE course_id
+        WHEN 1 THEN 'https://example.com/image1.jpg'
+        WHEN 2 THEN 'https://example.com/image2.jpg'
+        WHEN 3 THEN 'https://example.com/image3.jpg'
+        WHEN 4 THEN 'https://example.com/image4.jpg'
+        WHEN 5 THEN 'https://example.com/image5.jpg'
+        WHEN 6 THEN 'https://example.com/image6.jpg'
+        WHEN 7 THEN 'https://example.com/image7.jpg'
+        WHEN 8 THEN 'https://example.com/image8.jpg'
+        WHEN 9 THEN 'https://example.com/image9.jpg'
+        WHEN 10 THEN 'https://example.com/image10.jpg'
+        WHEN 11 THEN 'https://example.com/image11.jpg'
+        WHEN 12 THEN 'https://example.com/image12.jpg'
+        WHEN 13 THEN 'https://example.com/image13.jpg'
+        WHEN 14 THEN 'https://example.com/image14.jpg'
+        WHEN 15 THEN 'https://example.com/image15.jpg'
+        WHEN 16 THEN 'https://example.com/image16.jpg'
+        WHEN 17 THEN 'https://example.com/image17.jpg'
+        WHEN 18 THEN 'https://example.com/image18.jpg'
+        WHEN 19 THEN 'https://example.com/image19.jpg'
+        WHEN 20 THEN 'https://example.com/image20.jpg'
+        WHEN 21 THEN 'https://example.com/image21.jpg'
+        WHEN 22 THEN 'https://example.com/image22.jpg'
+        WHEN 23 THEN 'https://example.com/image23.jpg'
+        WHEN 24 THEN 'https://example.com/image24.jpg'
+        WHEN 25 THEN 'https://example.com/image25.jpg'
+    END;
+
+
+
+---------------------------------------------------------------------------------------------

@@ -51,9 +51,11 @@ class StudentList extends Component {
 
 class StudentDetails extends Component {
   student = null;
+  program = null;
 
   render() {
     if (!this.student) return null;
+    if (!this.program) return null;
 
     return (
       <div>
@@ -66,6 +68,11 @@ class StudentDetails extends Component {
             <Column width={2}>Email:</Column>
             <Column>{this.student.email}</Column>
           </Row>
+          <Row>
+            <Column width={2}>Course:</Column>
+            <Column>{this.program.course_name}</Column>
+          </Row>
+
         </Card>
         <Button.Light onClick={this.edit}>Edit</Button.Light>
       </div>
@@ -76,6 +83,9 @@ class StudentDetails extends Component {
     studentService.getStudent(this.props.match.params.id, (student) => {
       this.student = student;
     });
+    studentService.getEnrolledProgram(this.props.match.params.id, (program) => {
+      this.program = program
+    })
   }
 
   edit() {
@@ -135,8 +145,87 @@ class StudentEdit extends Component {
 }
 
 //---------------------------------------------------------------------------//
-class StudyList {
-    
+class StudyList extends Component {
+  study_programs = [];
+
+  render() {
+    return (
+      <Card title="Study Programs">
+        {this.study_programs.map((study_program) => (
+          <Row key={study_program.course_id}>
+            <Column>
+              {study_program.course_id +
+              ': ' +
+              study_program.course_code +
+              ' --- ' +
+              study_program.course_name +
+              '   '}
+              <NavLink to={'/study_programs/' + study_program.course_id}>{'Details'}</NavLink>
+            </Column>
+          </Row>
+        ))}
+      </Card>
+    )
+  }
+
+  mounted() {
+    studyprogramservice.getStudyPrograms((study_programs) => {
+      this.study_programs = study_programs
+    });
+  }
+}
+
+class CourseDetails extends Component {
+  study_program = null
+  list_names = [];
+
+  render() {
+    if (!this.study_program) return null;
+    if (!this.list_names) return null;
+    return (
+      <div> 
+        <Card title={"Details for " + this.study_program.course_name}>
+          <Row>
+            <Column width={2}>Course Name: </Column>
+            <Column>{this.study_program.course_name}</Column>
+          </Row>
+          <Row>
+            <Column width={2}>Course code: </Column>
+            <Column>{this.study_program.course_code}</Column>
+          </Row>
+          <Row>
+            <Column width={2}>Course Description: </Column>
+            <Column>{this.study_program.course_details}</Column>
+          </Row>
+        </Card>
+        <Card title="Group Photo of the course: ">
+          <img src= {this.study_program.image_link}></img>
+        </Card>
+        <Card title="Students in group: ">
+          <Row>
+            <Column width={2}>Group Leader:</Column>
+            <Column>{this.leader.name} </Column>
+          </Row>
+          <Row>
+          <Column width={2}>Students:</Column>
+          <Column width={2}>{this.list_names.name}</Column>
+          </Row>
+        </Card>
+      </div>
+    )
+  }
+
+  mounted() {
+    studyprogramservice.getLeader(this.props.match.params.course_id, (leader) => {
+    this.leader = leader
+    });
+    studyprogramservice.getOneProgram(this.props.match.params.course_id, (study_program) => {
+      this.study_program = study_program;
+    });
+    studentService.getStudentsEnrolled(this.props.match.params.course_id, (list_names)=> {
+      this.list_names = list_names
+    })
+  }
 }
 
 createRoot(document.getElementById('root')).render(
@@ -149,6 +238,8 @@ createRoot(document.getElementById('root')).render(
       <Route exact path="/students/:id" component={StudentDetails} />
       <Route exact path="/students/:id/edit" component={StudentEdit} />
       <Route exact path="/study_programs" component={StudyList} />
+      <Route exact path="/study_programs/:course_id" component={CourseDetails} />
+
     </HashRouter>
   </div>,
 );
