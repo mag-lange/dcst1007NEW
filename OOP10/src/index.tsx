@@ -221,7 +221,6 @@ class CourseDetails extends Component <{course_name?: string, course_code?: numb
             <NavLink to={'/students/'+ list_name.id}>{list_name.name} </NavLink>
             </li>
           ))}
-
           </Row>
         </Card>
       </div>
