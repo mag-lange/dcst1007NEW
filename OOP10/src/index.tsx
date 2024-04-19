@@ -2,11 +2,12 @@ import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Component } from 'react-simplified';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
-import { Student, StudyProgram, studentService, studyprogramservice } from './services';
+import {RouteComponentProps} from "react-router" //Recommended by Stack Overflow
+import { Student, StudyProgram, leader, list_names, studentService, studyprogramservice } from './services';
 import { Alert, Card, Row, Column, NavBar, Button, Form } from './widgets';
 import { createHashHistory } from 'history';
 
-const history = createHashHistory(); // Use history.push(...) to programmatically change path, for instance after successfully saving a student
+const history = createHashHistory(); 
 
 class Menu extends Component {
   render() {
@@ -26,7 +27,7 @@ class Home extends Component {
 }
 
 class StudentList extends Component {
-  students = [];
+  students: Student[] = []
 
   render() {
     return (
@@ -50,7 +51,7 @@ class StudentList extends Component {
 }
 
 
-class StudentDetails extends Component {
+class StudentDetails extends Component <{ match: { params: { id: number } } }> {
   student: Student = new Student()
   program: StudyProgram = new StudyProgram()
 
@@ -68,11 +69,16 @@ class StudentDetails extends Component {
           </Row>
           <Row>
             <Column width={2}>Course:</Column>
-            <Column>{this.program.course_name}</Column>
+            <Column><NavLink to={'/study_programs/' + this.program.course_id} >{this.program.course_name} </NavLink></Column>
           </Row>
 
         </Card>
+        <Column>
         <Button.Light onClick={this.edit}>Edit</Button.Light>
+        </Column>
+        <Column right> 
+        <Button.Danger onClick={this.delete}>Delete (Be careful)</Button.Danger>
+        </Column>
       </div>
     );
   }
@@ -81,7 +87,7 @@ class StudentDetails extends Component {
     studentService.getStudent(this.props.match.params.id, (student) => {
       this.student = student;
     });
-    studentService.getEnrolledProgram(this.props.match.params.id, (program) => {
+    studentService.getEnrolledProgram(this.props.match.params.id, (program: StudyProgram) => {
       this.program = program
     })
   }
@@ -89,10 +95,15 @@ class StudentDetails extends Component {
   edit() {
     history.push('/students/' + this.student.id + '/edit');
   }
+
+  delete() {
+    studentService.deleteStudent(this.props.match.params.id, () => history.push('/students/'))
+  }
 }
 
-class StudentEdit extends Component {
+class StudentEdit extends Component <{match: {params: {id: number}}}> {
   student: Student = new Student();
+
 
   render() {
 
@@ -143,7 +154,7 @@ class StudentEdit extends Component {
 
 //---------------------------------------------------------------------------//
 class StudyList extends Component {
-  study_programs = [];
+  study_programs: StudyProgram[] = [];
   study_program: StudyProgram = new StudyProgram()
 
   render() {
@@ -173,13 +184,12 @@ class StudyList extends Component {
   }
 }
 
-class CourseDetails extends Component <{course_name?: string, course_code?: number}> {
-  study_program = null
-  list_names = [];
+class CourseDetails extends Component <{course_name?: string, course_code?: number, match: {params: {course_id: number}}}> {
+  study_program = new StudyProgram()
+  leader = new leader()
+  list_names: list_names[] = []
 
   render() {
-    if (!this.study_program) return null;
-    if (!this.list_names) return null;
     return (
       <div> 
         <Card title={"Details for " + this.study_program.course_name}>
@@ -202,27 +212,25 @@ class CourseDetails extends Component <{course_name?: string, course_code?: numb
         <Card title="Students in group: ">
           <Row>
             <Column width={2}>Group Leader:</Column>
-            <Column>{this.leader.name} </Column>
+            <Column><NavLink to={'/students/' + this.leader.id}>{this.leader.name}</NavLink> </Column>
           </Row>
           <Row>
           <Column width={2}>Students :</Column>
           {this.list_names.map((list_name) => (
             <li key={list_name.name}>
-            {list_name.name}
+            <NavLink to={'/students/'+ list_name.id}>{list_name.name} </NavLink>
             </li>
           ))}
-          
-          
+
           </Row>
         </Card>
       </div>
     )
   }
-
   mounted() {
-    studyprogramservice.getLeader(this.props.match.params.course_id, (leader) => {
-    this.leader = leader
-    });
+    studyprogramservice.getLeader(this.props.match.params.course_id, (leader: leader) => {
+      this.leader = leader;
+      });
     studyprogramservice.getOneProgram(this.props.match.params.course_id, (study_program) => {
       this.study_program = study_program;
     });
