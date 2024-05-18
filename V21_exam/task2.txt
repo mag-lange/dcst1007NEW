@@ -1,0 +1,30 @@
+a) Forklar begrepene objekt, klasse, instans
+
+Et objekt er et felt med data som har unike attributer og har tilgang på en rekke metoder som er delt
+med andre objekter av samme klasse. Klasse er en mal som kan brukes til å lage objekter.
+En instans er et avkom eller et psrodukt av en klasse. 
+
+b) Hva gjør funksjonen super når den blir kalt i en konstruktør?
+
+Denne funksjonen sørger for at alle variablene fra super-klassen kommer med i underklassen.
+Superklassen er en overordnet klasse som arver ned attributer og metoder. 
+
+c) Hva er grunnen til at det vanligvis brukes unntakshåndtering når vi kobler oss til en database?
+
+Dette kommer av at en server ikke alltid responderer på samme måte. Den kan hende den bruker 
+mye lengre tid, eller at tjenesten ikke fungerer i det hele tatt. For at programmet ikke 
+skal kræsje helt pga trafikk-overlading, er det viktig at unntakshåndtering stopper disse 
+kallene som ikke ender i noe. 
+
+d) Det kan være lurt å legge kode som tilhører databaseoppkoblingen i en egen klasse. 
+Hvorfor er det slik?
+
+Ved å legge det i en egen klasse kan vi assosierere en rekke metoder til dataen og prossessere
+den lokalt. 
+
+e) Hvis du skulle lagre påloggingsinformasjon til databasen i programmet ditt, 
+hvordan vill du gjort dette?
+
+Dette måtte bli gjort gjennom en kryptert forbindelse, helst med assymetriske nøkkler. 
+Dette gjør at vi som kodere kun har tilgang på den krypterte påloggingsinformasjonen og brukere
+kan bli autentisert lokalt. 

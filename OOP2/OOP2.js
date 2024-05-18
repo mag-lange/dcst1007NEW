@@ -1,39 +1,12 @@
-//Script for the tasks to be delivered in week 4
-
+import {bank_services} from './OOP2_service';
 
 class BankAccount {
     constructor ( clientNumber, clientName, amount ) {
         this.clientNumber = clientNumber;
         this.clientName = clientName
-        this.amount  = parseInt(amount) //Feature that means you can write in 200 or "200"
+        this.amount  = parseInt(amount)
     }
-    amountNow() {
-        this.accountInfo()
-        return this.amount
-    }
-    withdraw(withdrawAmount) {
-        this.withdrawAmount = withdrawAmount
-        if (this.amount < this.withdrawAmount) {
-                return console.log(this.clientName + " does not have enough money to withdraw this amount")
-        }
-        else {
-            this.amount = (this.amount - withdrawAmount)
-        
-        this.accountInfo()
-        return console.log("Withdrawal of " + withdrawAmount + "$ from " + this.clientName + " successful. New amount: " + this.amountNow() + "$")
-        }
-    }
-    deposit(depositAmount) {
-        this.depositAmount = depositAmount
-        this.amount = (this.amount + depositAmount)
-        this.accountInfo()
-        return console.log("Money on its way! " + this.clientName + " has received " + depositAmount + "$, New amount: " + this.amountNow() + "$") 
-    }
-    accountInfo() {
-        console.log(this.clientName + " with client number " + this.clientNumber + " has " + this.amount + "$ available")
 
-        return document.getElementById(this.clientNumber.toString()).innerHTML = this.amount + "$"
-    }
 }
 class ChildAccount extends BankAccount {
     constructor ( clientNumber, clientName, age) {
@@ -48,15 +21,14 @@ class ChildAccount extends BankAccount {
         }
     }
 }
+class Bank_accounts {
+    accounts = []
+}
+console.log(bank_services.getAccounts())
 
-let lise_jensen = new ChildAccount(9294, "Lise Jensen", 2)
-let kari_hansen = new BankAccount(1234, "Kari Hansen", 895)
-let petter_olsen = new BankAccount(3311, "Petter Olsen", 0)
+
+
 let simulate = document.getElementById("simulate")
-lise_jensen.accountInfo()
-kari_hansen.accountInfo()
-petter_olsen.accountInfo()
-
 simulate.onclick = () => {
     
     let time_now = new Date();
